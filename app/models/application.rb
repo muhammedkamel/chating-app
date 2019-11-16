@@ -1,7 +1,8 @@
 class Application < ApplicationRecord
   has_secure_token :key
 
-  validates :key, :name, presence: true
+  validates :name, presence: true
   validates :key, uniqueness: true
 
+  has_many :chats, dependent: :destroy
 end
