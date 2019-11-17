@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2019_11_15_222243) do
 
-  create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key"
     t.string "name"
     t.integer "chats_count", default: 0
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_11_15_222243) do
     t.index ["key"], name: "index_applications_on_key", unique: true
   end
 
-  create_table "chats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "chats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "number"
     t.integer "messages_count", default: 0
     t.integer "lock_version", default: 0
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2019_11_15_222243) do
     t.index ["application_id"], name: "index_chats_on_application_id"
   end
 
-  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "number"
     t.string "content"
     t.integer "lock_version", default: 0
