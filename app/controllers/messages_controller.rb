@@ -1,29 +1,29 @@
 # frozen_string_literal: true
 
+# app/controllers/messages_controller.rb
+# @todo add filteration and sanitization
 class MessagesController < ApplicationController
   # GET applications/:application_id/chats/:chat_id/messages
   def index
-    @messages = Application.find_by(key: params[:application_id]).chats.find_by(number: params[:chat_id]).messages.all
+    @messages = Message.get_all(params[:application_id], params[:chat_id])
     json_response(@messages)
   end
 
   # POST applications/:application_id/chats/:chat_id/messages
   def create
-    @messages = Application.find_by(key: params[:application_id]).chats.find_by(number: params[:chat_id]).messages
-    @last_message_num = @messages&.last&.number.nil? ? 0 : @messages&.last&.number
-    @message = @messages.create!(content: message_params[:content], number: @last_message_num + 1)
+    @message = Message.create_message(params[:application_id], params[:chat_id], params[:content])
     json_response(@message, :created)
   end
 
   # GET applications/:application_id/chats/:chat_id/messages/:id
   def show
-    @message = Application.find_by(key: params[:application_id]).chats.find_by(number: params[:chat_id]).messages.find_by(number: params[:id])
+    @message = Message.get_by_number(params[:application_id], params[:chat_id], params[:id])
     json_response(@message)
   end
 
   # PUT applications/:application_id/chats/:chat_id/messages/:id
   def update
-    Application.find_by(key: params[:application_id]).chats.find_by(number: params[:chat_id]).messages.where(number: params[:id]).update(message_params)
+    Message.update_by_number(params[:application_id], params[:chat_id], params[:id], message_params)
     head :no_content
   end
 

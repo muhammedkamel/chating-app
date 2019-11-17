@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # app/controllers/applications_controller.rb
+# @todo add filteration and sanitization
 class ApplicationsController < ApplicationController
   # GET /applications
   def index
