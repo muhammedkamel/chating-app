@@ -10,5 +10,6 @@ class CreateMessages < ActiveRecord::Migration[5.2]
       t.timestamps
     end
     change_column :messages, :lock_version, :integer, default: 0
+    add_index :messages, %i[number chat_id], unique: true
   end
 end

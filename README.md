@@ -15,4 +15,5 @@ docker-compose run web rake db:create
 docker-compose run web rake db:migrate
 ```
 
-# Todo APIs docs
+# Consume the API
+> You can import the API in postman using this [link](https://www.getpostman.com/collections/a74866d57b83f6fe9c83) `https://www.getpostman.com/collections/a74866d57b83f6fe9c83`

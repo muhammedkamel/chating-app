@@ -11,5 +11,6 @@ class CreateChats < ActiveRecord::Migration[5.2]
     end
     change_column :chats, :messages_count, :integer, default: 0
     change_column :chats, :lock_version, :integer, default: 0
+    add_index :chats, %i[number application_id], unique: true
   end
 end
