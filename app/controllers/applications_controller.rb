@@ -5,19 +5,19 @@
 class ApplicationsController < ApplicationController
   # GET /applications
   def index
-    @apps = Application.all
+    @apps = Application.all().as_json(:except => :id)
     json_response(@apps)
   end
 
   # POST /applications
   def create
-    @app = Application.create!(app_params)
+    @app = Application.create!(app_params).as_json(:except => :id)
     json_response(@app, :created)
   end
 
   # GET /applications/:key
   def show
-    @app = Application.find_by(key: params[:id])
+    @app = Application.find_by(key: params[:id]).as_json(:except => :id)
     json_response(@app)
   end
 

@@ -6,7 +6,7 @@ class Message < ApplicationRecord
   validates_associated :chat
 
   def self.get_all(application_id, chat_number)
-    Application.find_by(key: application_id)&.chats&.find_by(number: chat_number)&.messages&.all
+    Application.find_by(key: application_id)&.chats&.find_by(number: chat_number)&.messages&.all&.as_json(:except => :id)
   end
 
   def self.create_message(application_id, chat_number, content)
@@ -23,11 +23,11 @@ class Message < ApplicationRecord
     @messages[0].chat.messages_count = @last_message_num
     @messages[0].chat.save
 
-    @message
+    @message.as_json(:except => :id)
   end
 
   def self.get_by_number(application_id, chat_number, message_number)
-    Application.find_by(key: application_id)&.chats&.find_by(number: chat_number)&.messages&.find_by(number: message_number)
+    Application.find_by(key: application_id)&.chats&.find_by(number: chat_number)&.messages&.find_by(number: message_number)&.as_json(:except => :id)
   end
 
   def self.update_by_number(application_id, chat_number, message_number, message)
